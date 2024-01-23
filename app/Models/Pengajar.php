@@ -9,6 +9,7 @@ class Pengajar extends Model
 {
     use HasFactory;
     protected $table = 'pengajar';
+    protected $primaryKey = 'id_pengajar';
     protected $fillable = ['id_dosen', 'id_jadwal'];
 
     public function dosen()

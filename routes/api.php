@@ -20,9 +20,10 @@ use App\Http\Controllers\PesertaController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 //matakuliah
 Route::get('/matakuliah', [MataKuliahController::class, 'index']);
 Route::get('/matakuliah/{id}', [MataKuliahController::class, 'show']);
@@ -53,14 +54,14 @@ Route::delete('/jadwalmatakuliah/{id}', [JadwalMataKuliahController::class, 'des
 
 //pengajar
 Route::get('/pengajar', [PengajarController::class, 'index']);
-Route::get('/pengajar/{id_dosen}/{id_jadwal}', [PengajarController::class, 'show']);
+Route::get('/pengajar/{id}', [PengajarController::class, 'show']);
 Route::post('/pengajar', [PengajarController::class, 'store']);
-Route::put('/pengajar/{id_dosen}/{id_jadwal}', [PengajarController::class, 'update']);
-Route::delete('/pengajar/{id_dosen}/{id_jadwal}', [PengajarController::class, 'destroy']);
+Route::put('/pengajar/{id}', [PengajarController::class, 'update']);
+Route::delete('/pengajar/{id}', [PengajarController::class, 'destroy']);
 
 //peserta
 Route::get('/peserta', [PesertaController::class, 'index']);
-Route::get('/peserta/{id_mahasiswa}/{id_jadwal}', [PesertaController::class, 'show']);
+Route::get('/peserta/{id}', [PesertaController::class, 'show']);
 Route::post('/peserta', [PesertaController::class, 'store']);
-Route::put('/peserta/{id_mahasiswa}/{id_jadwal}', [PesertaController::class, 'update']);
-Route::delete('/peserta/{id_mahasiswa}/{id_jadwal}', [PesertaController::class, 'destroy']);
+Route::put('/peserta/{id}', [PesertaController::class, 'update']);
+Route::delete('/peserta/{id}', [PesertaController::class, 'destroy']);

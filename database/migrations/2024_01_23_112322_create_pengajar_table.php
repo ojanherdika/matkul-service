@@ -14,9 +14,10 @@ class CreatePengajarTable extends Migration
     public function up()
     {
         Schema::create('pengajar', function (Blueprint $table) {
-             $table->unsignedBigInteger('id_dosen');
+            $table->id('id_pengajar');
+            $table->unsignedBigInteger('id_dosen');
             $table->unsignedBigInteger('id_jadwal');
-            $table->primary(['id_dosen', 'id_jadwal']);
+            $table->timestamps();
 
             $table->foreign('id_dosen')->references('id_dosen')->on('dosen')->onDelete('cascade');;
             $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwalmatakuliah')->onDelete('cascade');;
