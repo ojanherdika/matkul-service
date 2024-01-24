@@ -39,12 +39,23 @@ class PesertaController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'id_mahasiswa' => 'required|exists:mahasiswa,id_mahasiswa',
+                'id_jadwal' => 'required|exists:jadwalmatakuliah,id_jadwal',
+            ]);
+
             $peserta = Peserta::create($request->all());
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data created successfully',
                 'data' => $peserta
             ], Response::HTTP_CREATED);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation error',
+                'data' => $e->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -57,13 +68,24 @@ class PesertaController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'id_mahasiswa' => 'required|exists:mahasiswa,id_mahasiswa',
+                'id_jadwal' => 'required|exists:jadwalmatakuliah,id_jadwal',
+            ]);
             $peserta = Peserta::findOrFail($id);
             $peserta->update($request->all());
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data updated successfully',
                 'data' => $peserta
             ], Response::HTTP_OK);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation error',
+                'data' => $e->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json([
                 'status' => 'error',
