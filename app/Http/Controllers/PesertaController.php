@@ -10,7 +10,7 @@ class PesertaController extends Controller
 {
     public function index()
     {
-        $pesertas = Peserta::all();
+        $pesertas = Peserta::with('mahasiswa', 'jadwalMataKuliah.mataKuliah')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'Data retrieved successfully',
@@ -21,7 +21,7 @@ class PesertaController extends Controller
     public function show($id)
     {
         try {
-            $peserta = Peserta::findOrFail($id);
+            $peserta = Peserta::with('mahasiswa', 'jadwalMataKuliah.mataKuliah')->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data retrieved successfully',

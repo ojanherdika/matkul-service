@@ -23,4 +23,9 @@ class Peserta extends Model
     {
         return $this->belongsTo(JadwalMataKuliah::class, 'id_jadwal');
     }
+
+    public function mataKuliah()
+    {
+        return $this->belongsTo(MataKuliah::class, 'id_matakuliah', 'id_matakuliah');
+    }
 }

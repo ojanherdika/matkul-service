@@ -10,7 +10,7 @@ class PengajarController extends Controller
 {
     public function index()
     {
-        $pengajars = Pengajar::all();
+        $pengajars = Pengajar::with('dosen', 'jadwalMataKuliah.mataKuliah')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'Data retrieved successfully',
@@ -21,7 +21,7 @@ class PengajarController extends Controller
     public function show($id)
     {
         try {
-            $pengajar = Pengajar::findOrFail($id);
+            $pengajar = Pengajar::with('dosen', 'jadwalMataKuliah.mataKuliah')->findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data retrieved successfully',
